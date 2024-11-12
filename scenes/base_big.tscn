@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://qar23ool6h1x"]
+
+[ext_resource type="Texture2D" uid="uid://fjw0g6yhsvkq" path="res://icon.svg" id="1_86h3h"]
+[ext_resource type="Script" path="res://scripts/base_big.gd" id="1_f1oy8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8twtv"]
+size = Vector2(96, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4h0vg"]
+size = Vector2(346, 697)
+
+[node name="base_big" type="Node2D"]
+script = ExtResource("1_f1oy8")
+
+[node name="Area2D" type="Area2D" parent="." groups=["base"]]
+
+[node name="Icon" type="Sprite2D" parent="Area2D"]
+modulate = Color(1, 1, 0.470588, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_86h3h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8twtv")
+
+[node name="Timer" type="Timer" parent="." groups=["missile"]]
+wait_time = 1.75
+autostart = true
+
+[node name="range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="range"]
+position = Vector2(0, -299.5)
+shape = SubResource("RectangleShape2D_4h0vg")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -50)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
